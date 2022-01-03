@@ -9,4 +9,5 @@ A twitter client built with Django which filters tweets using sentiment analysis
 ## Twitter API Authentication
 
 At your terminal env the following command to authenticate with Twitter:
-`export BEARER_TOKEN='<your_bearer_token>'`
+
+    export BEARER_TOKEN='<your_bearer_token>'
