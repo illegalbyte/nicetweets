@@ -4,7 +4,7 @@ A twitter client built with Django which filters tweets using sentiment analysis
 
 ## Install dependencies with `pip`
 
-`pip install -r requirements.txt`
+    pip install -r requirements.txt
 
 ## Twitter API Authentication
 
