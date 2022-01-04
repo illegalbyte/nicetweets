@@ -18,6 +18,10 @@ At your terminal env the following command to authenticate with Twitter:
 
 Once tweets have been created by searching a topic using the web UI, the sentiment analysis API can be used to get the sentiment of each tweet. The API is available at `/api/<topic>?format=json` and returns a JSON object:
 
+**URL:** `/api/cats?format=json`
+
+**RESPONSE:**
+
 ```json
 {
     "status":"ok",
@@ -41,23 +45,11 @@ Once tweets have been created by searching a topic using the web UI, the sentime
             "tweet_topic":"cats"
         },
         {
-            "tweet_text":"Ronaldo was a amazing player in his prime, but I know cats like Greenwood are pissing themselves watching Ronaldo attempt to dribble and pass",
-            "tweet_sentiment":0.6000000000000001,
-            "tweet_created_at":"2022-01-04T05:18:30.112483+11:00",
-            "tweet_topic":"cats"
-        },
-        {
             "tweet_text":"All of my cats are having a truly Monday Monday.",
             "tweet_sentiment":0.0,
             "tweet_created_at":"2022-01-04T05:18:33.136829+11:00",
             "tweet_topic":"cats"
-        },
-        {
-            "tweet_text":"I gatti salveranno il cielo stellato dall'attacco della megacostellazione #Starlink https://t.co/BbL5AtbABU",
-            "tweet_sentiment":0.0,
-            "tweet_created_at":"2022-01-04T05:18:34.149712+11:00",
-            "tweet_topic":"cats"
-        }
+        } 
     ]
 }
 ```
