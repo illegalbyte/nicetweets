@@ -1,13 +1,25 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from nicetweetsapp.forms import TweetSearchField
-from .models import Tweet
-import pandas as pd
-from . import filteredstream_API
-from threading import Thread
 import json
 import time
+from threading import Thread
+
+# pandas managing dataframes
+import pandas as pd
+
+# django core
+from django.shortcuts import get_object_or_404, redirect, render
+
+# API endpoint for sentiment analysis:
+from django.http import JsonResponse
+from rest_framework.decorators import api_view
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializers import TweetSerializer
 
 
+from nicetweetsapp.forms import TweetSearchField
+from . import filteredstream_API
+from .models import Tweet
 
 # Create your views here.
 
@@ -64,5 +76,24 @@ def topicsentiment_api(request):
 
 '''
 
-def topicsentiment_api(request):
-    return render(request, 'nicetweetsapp/topicsentiment_api.html')
+
+class TweetAPIViews(APIView):
+    def post(self, request):
+        serializer = TweetSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse({'status': 'ok', 'data': serializer.data}, status=status.HTTP_201_CREATED)
+        else:
+            return Response({status: 'error', 'errors': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+
+    def get(self, request, topic=None):
+        if topic is None:
+            tweets = Tweet.objects.all()
+            serializer = TweetSerializer(tweets, many=True)
+            return Response({'status': 'ok', 'data': serializer.data}, status=status.HTTP_200_OK)
+        else:
+            tweets = Tweet.objects.filter(topic=topic)
+            serializer = TweetSerializer(tweets, many=True)
+            return Response({'status': 'ok', 'data': serializer.data}, status=status.HTTP_200_OK)
+
+
