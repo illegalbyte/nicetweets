@@ -16,7 +16,7 @@ At your terminal env the following command to authenticate with Twitter:
 
 Once tweets have been created by searching a topic using the web UI, the sentiment analysis API can be used to get the sentiment of each tweet. The API is available at `/api/<topic>?format=json` and returns a JSON object:
 
-'''json
+```json
 {
     "status":"ok",
     "data":[
@@ -58,7 +58,7 @@ Once tweets have been created by searching a topic using the web UI, the sentime
         }
     ]
 }
-'''
+```
 <!-- https://www.youtube.com/watch?v=zKij1_sHWAc -->
 <!-- https://testdriven.io/blog/django-ajax-xhr/#when-should-you-use-ajax -->
 <!-- https://dev.to/nobleobioma/create-a-simple-rest-api-with-django-253p -->
