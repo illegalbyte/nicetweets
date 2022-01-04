@@ -4,12 +4,14 @@ import json
 from . import sentiment
 from . import models
 from django.utils import timezone
-from . import secrets
 
 # To set your enviornment variables in your terminal run the following line:
 # export 'BEARER_TOKEN'='<your_bearer_token>'
 bearer_token = os.environ.get("BEARER_TOKEN")
-bearer_token = secrets.BEARER_TOKEN
+# dev path for secrets.py file with BEARER_TOKEN variable
+if os.path.isfile('./secrets.py') == True:
+    from . import secrets
+    bearer_token = secrets.BEARER_TOKEN
 
 def bearer_oauth(r):
     """
