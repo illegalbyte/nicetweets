@@ -1,12 +1,15 @@
 import requests
 import os
 import json
-import sentiment
+from . import sentiment
+from . import models
+from django.utils import timezone
+from . import secrets
 
 # To set your enviornment variables in your terminal run the following line:
 # export 'BEARER_TOKEN'='<your_bearer_token>'
 bearer_token = os.environ.get("BEARER_TOKEN")
-
+bearer_token = secrets.BEARER_TOKEN
 
 def bearer_oauth(r):
     """
@@ -50,10 +53,11 @@ def delete_all_rules(rules):
     print(json.dumps(response.json()))
 
 
-def set_rules(delete):
+def set_rules(delete, keyword):
     # You can adjust the rules if needed
     sample_rules = [
-        {"value": "bitcoin -is:retweet -is:reply", "tag": "BTC"},
+        {"value": f"{keyword} -is:retweet -is:reply"},
+        # {"value": "bitcoin -is:retweet -is:reply", "tag": "BTC"},
         # {"value": "cat has:images -grumpy", "tag": "cat pictures"},
     ]
     payload = {"add": sample_rules}
@@ -69,7 +73,7 @@ def set_rules(delete):
     print(json.dumps(response.json()))
 
 
-def get_stream(set):
+def get_stream(set, keyword):
     response = requests.get(
         "https://api.twitter.com/2/tweets/search/stream", auth=bearer_oauth, stream=True,
     )
@@ -86,15 +90,23 @@ def get_stream(set):
             tweet_text = json_response.get("data", {}).get("text", "")
             tweet_sentiment = sentiment.get_sentiment(tweet_text)
 
-            print(f"🔅 -> {tweet_sentiment}\n{tweet_text} \n")
+
+            tweet = models.Tweet(
+                text=tweet_text,
+                sentiment=tweet_sentiment,
+                created_at=timezone.now(),
+                topic=keyword,
+            )
+            tweet.save()
+            print(json.dumps(json_response, indent=4, sort_keys=True))
             # print(json.dumps(json_response, indent=4, sort_keys=True))
 
 
-def main():
+def main(keyword):
     rules = get_rules()
     delete = delete_all_rules(rules)
-    set = set_rules(delete)
-    get_stream(set)
+    set = set_rules(delete, keyword)
+    get_stream(set, keyword)
 
 
 if __name__ == "__main__":

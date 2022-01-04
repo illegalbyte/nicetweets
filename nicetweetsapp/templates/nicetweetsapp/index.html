@@ -1,0 +1,13 @@
+{% extends 'nicetweetsapp/base.html' %}
+
+
+{% block content %}
+
+<form method="POST" action="{% url "topicsentiment" %}" >
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit" value="Submit"> View Sentiment </button>
+</form>
+
+
+{% endblock %}

@@ -9,6 +9,7 @@ class Tweet(models.Model):
     text = models.CharField(max_length=400)
     sentiment = models.FloatField(default=0.0)
     created_at = models.DateTimeField(default=timezone.now)
+    topic = models.CharField(max_length=100, default='null')
 
     def store(self):
         self.save()
