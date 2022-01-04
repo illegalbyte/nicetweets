@@ -9,8 +9,12 @@ from django.utils import timezone
 # export 'BEARER_TOKEN'='<your_bearer_token>'
 bearer_token = os.environ.get("BEARER_TOKEN")
 # dev path for secrets.py file with BEARER_TOKEN variable
-from . import secrets
-bearer_token = secrets.BEARER_TOKEN
+
+try: 
+    from . import secrets
+    bearer_token = secrets.BEARER_TOKEN
+except ImportError:
+    bearer_token = os.environ.get("BEARER_TOKEN")
 
 def bearer_oauth(r):
     """
