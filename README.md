@@ -2,6 +2,12 @@
 
 ![Test Workflow](https://github.com/illegalbyte/nicetweets/actions/workflows/django.yml/badge.svg)
 
+<p float="left">
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-original.svg" height="50" width="50" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" height="50" width="50" />
+</p>
+
+
 A twitter client built with Django which filters tweets using sentiment analysis and only shows positive tweets about a given topic.
 
 ## Install dependencies with `pip`
