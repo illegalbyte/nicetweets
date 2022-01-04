@@ -20,6 +20,7 @@ from .serializers import TweetSerializer
 from nicetweetsapp.forms import TweetSearchField
 from . import filteredstream_API
 from .models import Tweet
+from nicetweetsapp import serializers
 
 # Create your views here.
 
@@ -51,7 +52,7 @@ def topicsentiment(request):
     # start the twitter request in a separate thread
     Thread(target=start_saving_tweets).start()
 
-    time.sleep(10)
+    time.sleep(6)
     # get the tweets from the database
     item = Tweet.objects.filter(topic=topic).values()
     df = pd.DataFrame(item)
@@ -62,19 +63,6 @@ def topicsentiment(request):
     df = df['sentiment'].tolist()
 
     return render(request, 'nicetweetsapp/topicsentiment.html', {'topic': topic, 'sentiment': df, 'timecreated': df1})
-    return render(request, 'nicetweetsapp/topicsentiment.html', {'topic': topic, 'df_sentiment': df_sentiment, 'df_time': df_time})
-
-'''
-def topicsentiment_api(request):
-    def get_tweet_topic_sentiment(topic):
-
-    
-    is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
-    if is_ajax:
-        if request.method == 'GET':
-            sentimentjson = json.dumps(T)
-
-'''
 
 
 class TweetAPIViews(APIView):
@@ -94,6 +82,11 @@ class TweetAPIViews(APIView):
         else:
             tweets = Tweet.objects.filter(topic=topic)
             serializer = TweetSerializer(tweets, many=True)
-            return Response({'status': 'ok', 'data': serializer.data}, status=status.HTTP_200_OK)
+            # handle ajax request
+            is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
+            if is_ajax:
+                return JsonResponse({'status': 'ok', 'data': serializer.data}, status=status.HTTP_200_OK)
+            else: # handle regular API request
+                return Response({'status': 'ok', 'data': serializer.data}, status=status.HTTP_200_OK)
 
 
