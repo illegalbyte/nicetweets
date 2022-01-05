@@ -1,8 +1,6 @@
-import json
 import time
 from threading import Thread
 from numpy import NaN
-from numpy.core.numeric import roll
 
 # pandas managing dataframes
 import pandas as pd
@@ -22,7 +20,6 @@ from .serializers import TweetSerializer
 from nicetweetsapp.forms import TweetSearchField
 from . import filteredstream_API
 from .models import Tweet
-from nicetweetsapp import serializers
 
 # Create your views here.
 
@@ -54,7 +51,12 @@ def topicsentiment(request):
     # start the twitter request in a separate thread
     Thread(target=start_saving_tweets).start()
 
-    time.sleep(6)
+    # make sure data exists before returning response to prevent key error
+    sample_response = Tweet.objects.filter(topic=topic).values()
+    while sample_response.count() == 0:
+        time.sleep(0.1)
+        sample_response = Tweet.objects.filter(topic=topic).values()
+
     # get the tweets from the database
     item = Tweet.objects.filter(topic=topic).values()
     df = pd.DataFrame(item)
