@@ -36,7 +36,6 @@ def index(request):
     else:
         # if a GET (or any other method) we'll create a blank form
         form = TweetSearchField()
-
     return render(request, 'nicetweetsapp/index.html', {'form': form})
 
 
