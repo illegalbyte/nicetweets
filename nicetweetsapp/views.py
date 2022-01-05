@@ -36,6 +36,11 @@ def index(request):
     else:
         # if a GET (or any other method) we'll create a blank form
         form = TweetSearchField()
+    # OPTION: Delete all tweets on index page load
+    if (False):
+        Tweet.objects.all().delete()
+        print("-\n-\n-\n ->> Deleting all tweets <<- \n-\n-\n-")
+
     return render(request, 'nicetweetsapp/index.html', {'form': form})
 
 
