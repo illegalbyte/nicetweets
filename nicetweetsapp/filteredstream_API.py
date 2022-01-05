@@ -104,7 +104,8 @@ def get_stream(set, keyword):
             )
             tweet.save()
             print(json.dumps(json_response, indent=4, sort_keys=True))
-            # print(json.dumps(json_response, indent=4, sort_keys=True))
+            # exit() if there has not been a request for a while
+            
 
 
 def main(keyword):
