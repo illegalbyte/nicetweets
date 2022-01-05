@@ -67,20 +67,17 @@
         $.ajax({
             url: tweets_api_url,
             success: function(data) {
-                console.log(data);
+
                 response = data;
                 var timearray = [];
                 var sentimentarray = [];
-                var moving_average = response.data.rolling_average;
-                console.log("moving average: " + moving_average);
+                var moving_average = response.rolling_average;
+
                 $.each(response.data, function(index, value) {
                     timearray.push(value.tweet_created_at);
                     sentimentarray.push(value.tweet_sentiment);
-                    //moving_average.push(value.rolling_average);
                 });
 
-                console.log(timearray);
-                console.log(sentimentarray);
                 myChart.data.labels = timearray;
                 myChart.data.datasets[0].data = sentimentarray;
                 myChart.data.datasets[1].data = moving_average;
@@ -89,7 +86,7 @@
         })
     }
 
-    setInterval(getData, 3000);
+    setInterval(getData, 1000);
     
 </script>
 
