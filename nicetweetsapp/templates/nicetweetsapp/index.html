@@ -2,12 +2,28 @@
 
 
 {% block content %}
+<script>
+    function showLoadingBar() {
+            
+        document.getElementById('loading-text').innerHTML = 'loading tweets...';
+        document.getElementById("loader").classList.add("loader");
+        document.getElementById("loaderBar").classList.add("loaderBar");
+    }
 
-<form method="POST" action="{% url "topicsentiment" %}" >
+</script>
+
+<form id="searchform" onSubmit="showLoadingBar()" method="POST" action="{% url "topicsentiment" %}">
     {% csrf_token %}
     {{ form }}
     <button type="submit" value="Submit"> View Sentiment </button>
 </form>
 
+
+<div id="loading-box">
+    <div id="loader">
+        <div id="loaderBar"></div>
+    </div>
+    <h2 id="loading-text"></h2>
+</div>
 
 {% endblock %}
