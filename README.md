@@ -9,7 +9,7 @@
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" height="50", width="50" />
 </p>
 
-View the live sentiment of any given keyword/topic on Twitter.
+View the live sentiment of any given keyword/topic on Twitter from the comfort of your browser.
 
 <img src="https://github.com/illegalbyte/nicetweets/blob/main/nicetweetsapp/static/img/ezgif-2-a69c3ed9ba.gif?raw=true">
 
