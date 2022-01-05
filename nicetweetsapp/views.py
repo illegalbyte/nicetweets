@@ -1,6 +1,8 @@
 import json
 import time
 from threading import Thread
+from numpy import NaN
+from numpy.core.numeric import roll
 
 # pandas managing dataframes
 import pandas as pd
@@ -66,27 +68,27 @@ def topicsentiment(request):
 
 
 class TweetAPIViews(APIView):
-    def post(self, request):
-        serializer = TweetSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse({'status': 'ok', 'data': serializer.data}, status=status.HTTP_201_CREATED)
-        else:
-            return Response({status: 'error', 'errors': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+
 
     def get(self, request, topic=None):
+
         if topic is None:
+            # if no topic is specified, return all tweets
             tweets = Tweet.objects.all()
             serializer = TweetSerializer(tweets, many=True)
             return Response({'status': 'ok', 'data': serializer.data}, status=status.HTTP_200_OK)
-        else:
+        if topic is not None:
+            # if a topic is specified, return all tweets for that topic
             tweets = Tweet.objects.filter(topic=topic)
             serializer = TweetSerializer(tweets, many=True)
+            df = pd.DataFrame(serializer.data)
+            df['MA'] = df.get('tweet_sentiment').rolling(window=10).mean().fillna(0)
+            rolling_average = df['MA'].tolist()
             # handle ajax request
             is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
             if is_ajax:
-                return JsonResponse({'status': 'ok', 'data': serializer.data}, status=status.HTTP_200_OK)
+                return JsonResponse({'status': 'ok', 'data': serializer.data, 'rolling_average': rolling_average}, status=status.HTTP_200_OK)
             else: # handle regular API request
-                return Response({'status': 'ok', 'data': serializer.data}, status=status.HTTP_200_OK)
+                return Response({'status': 'ok', 'data': serializer.data, 'rolling_average': rolling_average}, status=status.HTTP_200_OK)
 
 
