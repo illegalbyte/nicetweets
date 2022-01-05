@@ -93,7 +93,8 @@ def get_stream(set, keyword):
         if response_line:
             json_response = json.loads(response_line)
             tweet_text = json_response.get("data", {}).get("text", "")
-            tweet_sentiment = sentiment.get_sentiment(tweet_text)
+            # tweet_sentiment = sentiment.get_sentiment(tweet_text)
+            tweet_sentiment = sentiment.nltk_sentiment(tweet_text)
 
 
             tweet = models.Tweet(
@@ -105,7 +106,7 @@ def get_stream(set, keyword):
             tweet.save()
             print(json.dumps(json_response, indent=4, sort_keys=True))
             # exit() if there has not been a request for a while
-            
+
 
 
 def main(keyword):
