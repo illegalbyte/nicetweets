@@ -9,6 +9,9 @@
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" height="50", width="50" />
 </p>
 
+An elegant dashboard for viewing twitter sentiment for a given keyword/topic.
+
+<img src="https://github.com/illegalbyte/nicetweets/blob/main/nicetweetsapp/static/img/ezgif-2-a69c3ed9ba.gif?raw=true">
 
 A twitter client built with Django which filters tweets using sentiment analysis and only shows positive tweets about a given topic.
 
