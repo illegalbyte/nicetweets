@@ -66,12 +66,12 @@ Once tweets have been created by searching a topic using the web UI, the sentime
 <!-- https://dev.to/nobleobioma/create-a-simple-rest-api-with-django-253p -->
 <!-- https://stackabuse.com/creating-a-rest-api-with-django-rest-framework/ -->
 
-## TODO:
+## BUGS AND FUTURE FEATURES
 
-- [ ] New topics will cause a DJANGO ERROR when queried if the twitter API call has not yet logged any tweets for the topic
+- [X] New topics will cause a DJANGO ERROR when queried if the twitter API call has not yet logged any tweets for the topic
 - [ ] Kill the thread when the sentiment view is closed (or when the app is closed)
-- [ ] Text validation tweet queries (i.e. .lower() and .strip())
 - [ ] Chart.js: view tweet text in labels, hide y axis labels
 - [ ] Improve design of chart.js to be friendlier [EXAMPLE](https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs3/171902967/original/6e36ec8b688c99d15c4958ac224c93e259cf369f/django-live-streaming-charts.png)
 - [ ] Add a search bar to the web UI
 - [ ] Function to run a historical sentiment analysis of tweets for a given topic
+- [ ] Loading bar won't display in Safari due to Safari not displaying CSS changes when loading a page
