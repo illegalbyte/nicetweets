@@ -61,3 +61,21 @@
       width:0%;
     }
   }
+
+
+  sentiment-average {
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+
+  .sentiment-average-positive {
+    color: #5DADE2;
+  }
+
+  .sentiment-average-negative {
+    color: #F7464A;
+  }
+
+  .sentiment-average-neutral {
+    color: #FDB45C;
+  }

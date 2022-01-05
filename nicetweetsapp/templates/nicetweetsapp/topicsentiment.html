@@ -4,10 +4,29 @@
 
 <h1>Sentiment for: {{ topic }}</h1>
 
+<div id="sentiment-counter">
+    <h2 id="sentiment-average">?</h2>
+</dib>
 
 
 <canvas id="myChart" width="400" height="400"></canvas>
 <script>
+
+    // update the sentiment average number and styling
+    function updateSentimentTicker(sentiment_average) {
+        ticker = document.getElementById("sentiment-average")
+        ticker.innerHTML = sentiment_average
+        if (sentiment_average > 0) {
+            ticker.style.color = "green"
+        } else if (sentiment_average < 0) {
+            ticker.style.color = "red"
+        } else {
+            ticker.style.color = "black"
+        }
+
+    }
+
+
     var timecreated = {{timecreated|safe}};
     var sentiment = {{sentiment|safe}};
     const ctx = document.getElementById('myChart').getContext('2d');
@@ -67,7 +86,18 @@
                     timearray.push(value.tweet_created_at);
                     sentimentarray.push(value.tweet_sentiment);
                 });
-
+                
+                // update ticker
+                const average = arr => arr.reduce((a,b) => a + b, 0) / arr.length;
+                const median = arr => {
+                    const mid = Math.floor(arr.length / 2),
+                      nums = [...arr].sort((a, b) => a - b);
+                    return arr.length % 2 !== 0 ? nums[mid] : (nums[mid - 1] + nums[mid]) / 2;
+                  };
+                ticker_number = average(sentimentarray);
+                updateSentimentTicker(ticker_number.toFixed(5));
+                
+                // push new data to chart
                 myChart.data.labels = timearray;
                 myChart.data.datasets[0].data = sentimentarray;
                 myChart.data.datasets[1].data = moving_average;
