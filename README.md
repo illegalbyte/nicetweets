@@ -65,10 +65,12 @@ Once tweets have been created by searching a topic using the web UI, the sentime
 <!-- https://testdriven.io/blog/django-ajax-xhr/#when-should-you-use-ajax -->
 <!-- https://dev.to/nobleobioma/create-a-simple-rest-api-with-django-253p -->
 <!-- https://stackabuse.com/creating-a-rest-api-with-django-rest-framework/ -->
+<!--https://codepen.io/beleje/pen/OYOdOP?editors=1010-->
 
 ## BUGS AND FUTURE FEATURES
 
 - [X] New topics will cause a DJANGO ERROR when queried if the twitter API call has not yet logged any tweets for the topic
+- [ ] ensure objects exist before performing pandas operations in views.py
 - [ ] Kill the thread when the sentiment view is closed (or when the app is closed)
 - [ ] Add tests
 - [ ] Chart.js: view tweet text in labels, hide y axis labels
