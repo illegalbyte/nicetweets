@@ -71,6 +71,8 @@ Once tweets have been created by searching a topic using the web UI, the sentime
 
 - [X] New topics will cause a DJANGO ERROR when queried if the twitter API call has not yet logged any tweets for the topic
 - [ ] ensure objects exist before performing pandas operations in views.py
+- [ ] Add /positivetimeline where only tweets with sentiment > 0.5 are displayed
+- [ ] before progressing past index page, ensure the twitter api has returned 200 status code
 - [ ] Kill the thread when the sentiment view is closed (or when the app is closed)
 - [ ] Add tests
 - [ ] Chart.js: view tweet text in labels, hide y axis labels
