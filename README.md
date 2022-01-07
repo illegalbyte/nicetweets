@@ -69,6 +69,7 @@ Once tweets have been created by searching a topic using the web UI, the sentime
 <!-- https://dev.to/nobleobioma/create-a-simple-rest-api-with-django-253p -->
 <!-- https://stackabuse.com/creating-a-rest-api-with-django-rest-framework/ -->
 <!--https://codepen.io/beleje/pen/OYOdOP?editors=1010-->
+<!-- https://ezgif.com -->
 
 ## BUGS AND FUTURE FEATURES
 
