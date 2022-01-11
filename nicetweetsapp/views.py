@@ -21,8 +21,6 @@ from nicetweetsapp.forms import TweetSearchField
 from . import filteredstream_API
 from .models import Tweet
 
-# Create your views here.
-
 def index(request):
     # if this is a post request, process the form data
     if request.method == 'POST':
