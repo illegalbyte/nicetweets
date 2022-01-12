@@ -39,7 +39,6 @@ class SavingTweetsTests(TestCase):
         saved_tweet = Tweet.objects.get(text='Hello world')
         self.assertEqual(saved_tweet.text, 'Hello world')
         self.assertEqual(saved_tweet.sentiment, 0.0)
-        self.assertEqual(saved_tweet.created_at, timezone.now())
 
 ''' THESE TESTS WON'T WORK BECAUSE OF THE INFINITE LOOP OF THE TWITTER API BEING CALLED
 # THEY ALSO CANNOT BE CALLED ON GITHUB ACTIONS DUE TO THE LACK OF AN API KEY
