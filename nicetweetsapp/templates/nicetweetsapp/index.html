@@ -4,7 +4,7 @@
 {% block content %}
 <script>
     function showLoadingBar() {
-            
+        // shows the loading bar once the form is submitted
         document.getElementById('loading-text').innerHTML = 'loading tweets...';
         document.getElementById("loader").classList.add("loader");
         document.getElementById("loaderBar").classList.add("loaderBar");
@@ -15,9 +15,14 @@
 <form id="searchform" onSubmit="showLoadingBar()" method="POST" action="{% url "topicsentiment" %}">
     {% csrf_token %}
     {{ form }}
-    <button type="submit" value="Submit"> View Sentiment </button>
+    <button type="submit" value="Submit"> View Sentiment Graph</button>
 </form>
 
+<form id="searchform" onSubmit="showLoadingBar()" method="POST" action="{% url "nicetimeline" %}">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit" value="Submit"> View live timeline</button>
+</form>
 
 <div id="loading-box">
     <div id="loader">
