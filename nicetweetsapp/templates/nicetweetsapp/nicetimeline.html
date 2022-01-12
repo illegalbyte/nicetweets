@@ -2,11 +2,16 @@
 
 {% block content %}
 
-{% if tweets %}
+<center><h2>Your nice timeline for {{ topic }}</h2></center>
 
+{% if tweets %}
     {% for tweet in tweets %}
+        {% if tweet.sentiment > 0.5 %}
                 <div class="tweet-body">
-                    <p> {{ tweet.sentiment }} </p>
-                    <p>{{ tweet.text }}</p>
+                    <p>{{ tweet.sentiment }}<br>{{ tweet.text }}</p>
                 </div>
-        {% endfor %}
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+{% endblock %}
