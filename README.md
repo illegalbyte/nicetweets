@@ -71,10 +71,13 @@ Once tweets have been created by searching a topic using the web UI, the sentime
 <!--https://codepen.io/beleje/pen/OYOdOP?editors=1010-->
 <!-- https://ezgif.com -->
 
-## BUGS AND FUTURE FEATURES
+## BUGS AND TODO
 
 - [X] New topics will cause a DJANGO ERROR when queried if the twitter API call has not yet logged any tweets for the topic
 - [ ] ensure objects exist before performing pandas operations in views.py
+- [ ] better management of the twitter thread (auto kill after a certain time? with included timer?)
+- [ ] add a database model which keeps track of how many database calls have been made in the last 30 minutes and prevent API calls if the limit has been reached – display this number in the header of the web page
+- [ ] move to a twitter oauth authentication method
 - [ ] Add /positivetimeline where only tweets with sentiment > 0.5 are displayed
 - [ ] before progressing past index page, ensure the twitter api has returned 200 status code
 - [ ] Kill the thread when the sentiment view is closed (or when the app is closed)
