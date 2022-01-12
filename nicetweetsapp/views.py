@@ -70,6 +70,9 @@ def topicsentiment(request):
 
 	return render(request, 'nicetweetsapp/topicsentiment.html', {'topic': topic, 'sentiment': df, 'timecreated': df1})
 
+def nicetimeline(request):
+	return render(request, 'nicetweetsapp/nicetimeline.html')
+
 
 class TweetAPIViews(APIView):
 

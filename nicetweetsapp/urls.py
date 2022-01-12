@@ -7,4 +7,5 @@ urlpatterns = [
     path('topicsentiment', views.topicsentiment, name='topicsentiment'),
     path('api/', views.TweetAPIViews.as_view(), name='api'),
     path('api/<str:topic>', views.TweetAPIViews.as_view(), name='api'),
+    path('nicetimeline', views.nicetimeline, name='nicetimeline'),
 ]

@@ -1,0 +1,12 @@
+{% extends 'nicetweetsapp/base.html' %}
+
+{% block content %}
+
+{% if tweets %}
+
+    {% for tweet in tweets %}
+                <div class="tweet-body">
+                    <p> {{ tweet.sentiment }} </p>
+                    <p>{{ tweet.text }}</p>
+                </div>
+        {% endfor %}
