@@ -71,7 +71,17 @@ def topicsentiment(request):
 	return render(request, 'nicetweetsapp/topicsentiment.html', {'topic': topic, 'sentiment': df, 'timecreated': df1})
 
 def nicetimeline(request):
-	return render(request, 'nicetweetsapp/nicetimeline.html')
+	'''
+	A view for the timeline of a given topic, filtered based on the sentiment of the tweets
+	'''
+	SENTIMENT_THRESHOLD = 0.5
+	topic = request.POST.get('search_topic')
+	# get the tweets from the database
+	tweets = Tweet.objects.filter(topic=topic).values()
+	# get the sentiment of the tweets
+
+
+	return render(request, 'nicetweetsapp/nicetimeline.html', {'topic': topic, 'tweets': tweets})
 
 
 class TweetAPIViews(APIView):
